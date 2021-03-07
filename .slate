@@ -27,6 +27,7 @@ alias w5-o4  move ${x}+4*${col};${y}  5*${col};${h}
 alias w5-o5  move ${x}+5*${col};${y}  5*${col};${h}
 
 # Display profiles
+layout dual 'Spotify':REPEAT              ${w5}     ${left}
 layout dual 'Sonos S1 Controller':REPEAT  ${w5}     ${left}
 layout dual 'Slack':REPEAT                ${w5-o5}  ${left}
 layout dual 'Numbers':REPEAT              ${w5-o5}  ${left}

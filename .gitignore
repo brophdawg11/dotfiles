@@ -1,2 +1,3 @@
 *.sublime-project
 *.sublime-workspace
+.bash_profile_local*
