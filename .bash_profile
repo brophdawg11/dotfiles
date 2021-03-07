@@ -1,24 +1,53 @@
-# Source machine-local configs (pre)
-if [ -f ~/.bash_profile_local ]; then
-  . ~/.bash_profile_local
+echo "Running .bash_profile"
+
+# Prerequisites to be set in .bash_profile_local_pre:
+# BREW_DIR - base installation dir for homebrew
+# N_DIR - base installation dir for n
+
+##### Machine-local pre config #####
+if [ -f ~/.bash_profile_local_pre ]; then
+    echo "Running .bash_profile_local_pre"
+    . ~/.bash_profile_local_pre
+else
+    echo "No .bash_profile_local_pre file found, exiting"
+    exit 1
 fi
 
 cd "${START_DIR}"
 
-export EDITOR=emacs
+##### Global Updates #####
+export PATH="${HOME}/bin:$PATH"
+export PATH="${BREW_DIR}/bin:$PATH"
+export EDITOR="emacs"
 export GREP_OPTIONS="--color"
 export HOMEBREW_BUNDLE_FILE="~/Brewfile"
+export N_PREFIX="${N_DIR}"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+
+# Bring in git-prompt and tab completion
+GIT_DIR="$(dirname $(which git))/$(dirname $(readlink $(which git)))/.."
+. "${GIT_DIR}/etc/bash_completion.d/git-prompt.sh"
+. "${GIT_DIR}/etc/bash_completion.d/git-completion.bash"
+
+# Homebrew bash completion
+[ -f "${BREW_DIR}/etc/bash_completion" ] && . "${BREW_DIR}/etc/bash_completion"
+
+##### Aliases #####
 alias ls="ls -Fla"
 alias rm="rm -i"
+alias npx-debug="npx --node-arg=--inspect-brk"
 
-## Bring in git-prompt and tab completion
-. /usr/local/Cellar/git/2.17.0/etc/bash_completion.d/git-prompt.sh
-. /usr/local/Cellar/git/2.17.0/etc/bash_completion.d/git-completion.bash
 
-## Homebrew bash completions
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+##### Utility Functions #####
 
-## http://jeroenjanssens.com/2013/08/16/quickly-navigate-your-filesystem-from-the-command-line.html
+# Kill the process on a given port
+killport () {
+    for proc in $(lsof -w -n -i tcp:$1 | awk 'NR!=1 {print $2}')
+    do
+        kill -9 $proc && echo "Killed $1"
+    done
+}
+
+# http://jeroenjanssens.com/2013/08/16/quickly-navigate-your-filesystem-from-the-command-line.html
 export MARKPATH=$HOME/.marks
 function jump {
     cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
@@ -27,18 +56,38 @@ function mark {
     mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"
 }
 function unmark {
-rm -i "$MARKPATH/$1"
+    rm -i "$MARKPATH/$1"
 }
+#function marks {
+#    ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\t-/g' && echo
+#}
+# OSX Version
 function marks {
-    \ls -l "$MARKPATH" | tail -n +2 | sed 's/  / /g' | cut -d' ' -f9- | awk -F ' -> ' '{printf "%-10s -> %s\n", $1, $2}'
+    ls -l "$MARKPATH" | tail -n +2 | sed 's/  / /g' | cut -d' ' -f9- | awk -F ' -> ' '{printf "%-10s -> %s\n", $1, $2}'
 }
 
-# Bash Prompt
-Color_Off="\[\033[0m\]"       # Text Reset
+# Delete the docker qcow2 file to clean up space on OSX
+function docker-qcow2-cleanup {
+  docker ps
+  if [ $? == 0 ]; then
+    echo "Please kill docker first";
+  else if [! -f ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2 ]; then
+    echo "No Docker.qcow2 file found";
+  else
+    df -h
+    echo "Removing Docker.qcow2"
+    ls ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/
+    rm -f ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2
+    df -h
+  fi
+}
+
+##### Bash Prompt #####
 Green="\[\033[0;32m\]"        # Green
-BYellow="\[\033[1;33m\]"      # Yellow
-IRed="\[\033[0;91m\]"         # Red
+BYellow="\[\033[1;33m\]"      # Yellow (bold)
+IRed="\[\033[0;91m\]"         # Red (high intensity)
 PathShort="\w"
+Color_Off="\[\033[0m\]"       # Text Reset
 export PS1=$BYellow$PathShort$Color_Off'$(git branch &>/dev/null;\
 if [ $? -eq 0 ]; then \
   echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
@@ -54,16 +103,15 @@ else \
   echo "'$Color_Off'> "; \
 fi)'
 
-export N_PREFIX="$HOME/lib/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
-
 # If in VSCode, cd to the project directory
 if [ $TERM_PROGRAM == "vscode" ] && [ $OLDPWD != "" ]; then
     echo "cd-ing to the current VSCode project directory"
     cd $OLDPWD
 fi
 
-# Source machine-local configs (post)
+##### Machine-local post config #####
 if [ -f ~/.bash_profile_local_post ]; then
-  . ~/.bash_profile_local_post
+    echo "  Running .bash_profile_local_post"
+    . ~/.bash_profile_local_post
 fi
 
