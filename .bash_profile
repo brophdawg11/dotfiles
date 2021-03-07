@@ -9,8 +9,8 @@ if [ -f ~/.bash_profile_local_pre ]; then
     echo "Running .bash_profile_local_pre"
     . ~/.bash_profile_local_pre
 else
-    echo "No .bash_profile_local_pre file found, exiting"
-    exit 1
+    echo "No .bash_profile_local_pre file found, exiting!"
+    return
 fi
 
 cd "${START_DIR}"
@@ -71,7 +71,7 @@ function docker-qcow2-cleanup {
   docker ps
   if [ $? == 0 ]; then
     echo "Please kill docker first";
-  else if [! -f ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2 ]; then
+  elif [! -f ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2 ]; then
     echo "No Docker.qcow2 file found";
   else
     df -h
