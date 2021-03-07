@@ -9,35 +9,92 @@ config focusCheckWidthMax 3000
 # Monitor Aliases
 alias left  0
 alias right 1
+alias imac     2560x1440
+alias laptop   1440x900
+alias external 2560x1440
 
 # Grid aliases
-alias x screenOriginX
-alias y screenOriginY
-alias w screenSizeX
-alias h screenSizeY
-alias col ${w}/10
-alias hcol ${h}/10
+alias x    screenOriginX
+alias y    screenOriginY
+alias w    screenSizeX
+alias h    screenSizeY
+alias col  ${w}/10
+alias row  ${h}/10
+alias h-1  ${h}*0.95
+alias h-2  ${h}*0.90
 
 # Display aliases
-alias w5     move ${x}+0*${col};${y}  5*${col};${h}
-alias w5-o1  move ${x}+1*${col};${y}  5*${col};${h}
-alias w5-o2  move ${x}+2*${col};${y}  5*${col};${h}
-alias w5-o3  move ${x}+3*${col};${y}  5*${col};${h}
-alias w5-o4  move ${x}+4*${col};${y}  5*${col};${h}
-alias w5-o5  move ${x}+5*${col};${y}  5*${col};${h}
+alias whole     move  ${x};${y}           12*${col};${h}
+alias left      move  ${x}+0*${col};${y}  10*${col};${h}
+alias center    move  ${x}+1*${col};${y}  10*${col};${h}
+alias right     move  ${x}+2*${col};${y}  10*${col};${h}
+alias w5        move  ${x}+0*${col};${y}  5*${col};${h}
+alias w5-o1     move  ${x}+1*${col};${y}  5*${col};${h}
+alias w5-o2     move  ${x}+2*${col};${y}  5*${col};${h}
+alias w5-o3     move  ${x}+3*${col};${y}  5*${col};${h}
+alias w5-o4     move  ${x}+4*${col};${y}  5*${col};${h}
+alias w5-o5     move  ${x}+5*${col};${y}  5*${col};${h}
+alias w5-h1     move  ${x}+0*${col};${y}  5*${col};${h-1}
+alias w5-o1-h1  move  ${x}+1*${col};${y}  5*${col};${h-1}
+alias w5-o2-h1  move  ${x}+2*${col};${y}  5*${col};${h-1}
+alias w5-o3-h1  move  ${x}+3*${col};${y}  5*${col};${h-1}
+alias w5-o4-h1  move  ${x}+4*${col};${y}  5*${col};${h-1}
+alias w5-o5-h1  move  ${x}+5*${col};${y}  5*${col};${h-1}
+alias w5-h2     move  ${x}+0*${col};${y}  5*${col};${h-2}
+alias w5-o1-h2  move  ${x}+1*${col};${y}  5*${col};${h-2}
+alias w5-o2-h2  move  ${x}+2*${col};${y}  5*${col};${h-2}
+alias w5-o3-h2  move  ${x}+3*${col};${y}  5*${col};${h-2}
+alias w5-o4-h2  move  ${x}+4*${col};${y}  5*${col};${h-2}
+alias w5-o5-h2  move  ${x}+5*${col};${y}  5*${col};${h-2}
+alias w6        move  ${x}+6*${col};${y}  5*${col};${h}
 
 # Display profiles
-layout dual 'Spotify':REPEAT              ${w5}     ${left}
-layout dual 'Sonos S1 Controller':REPEAT  ${w5}     ${left}
-layout dual 'Slack':REPEAT                ${w5-o5}  ${left}
-layout dual 'Numbers':REPEAT              ${w5-o5}  ${left}
-layout dual 'Google Chrome':REPEAT        ${w5}     ${right}
-layout dual 'iTerm2':REPEAT               ${w5-o3}  ${right}
-layout dual 'Sublime Text':REPEAT         ${w5-o5}  ${right}
-layout dual 'Sourcetree':REPEAT           ${w5-o5}  ${right}
+## Home - iMac + External
+layout imac-dual 'Spotify':REPEAT              ${w5}     ${left}
+layout imac-dual 'Sonos S1 Controller':REPEAT  ${w5}     ${left}
+layout imac-dual 'Slack':REPEAT                ${w5-o5}  ${left}
+layout imac-dual 'Numbers':REPEAT              ${w5-o5}  ${left}
+layout imac-dual 'Google Chrome':REPEAT        ${w5}     ${right}
+layout imac-dual 'iTerm2':REPEAT               ${w5-o3}  ${right}
+layout imac-dual 'Sublime Text':REPEAT         ${w5-o5}  ${right}
+layout imac-dual 'Sourcetree':REPEAT           ${w5-o5}  ${right}
+
+## URBN - Laptop + External
+layout urbn 'Google Chrome':REPEAT_LAST,TITLE_ORDER_REGEX=^Dev(eloper\s)?Tools\s-\s.+$  ${whole} ${laptop} | ${w5-h2} ${external}
+layout urbn 'Slack':REPEAT               ${w5-o1-h1}  ${external}
+layout urbn 'iTerm2':REPEAT              ${w5-o2}     ${external}
+layout urbn 'Sublime Text':REPEAT        ${w5-o5}     ${external}
+layout urbn 'Fork':REPEAT                ${w5-o5}     ${external}
+layout urbn 'Microsoft Outlook':REPEAT   ${w6}        ${external}
+layout urbn 'Spotify':REPEAT             ${whole}     ${laptop}
+layout urbn 'Sonos S1 Controller':REPEAT ${whole}     ${laptop}
+
+## Laptop only
+layout laptop 'Google Chrome':REPEAT        ${whole}   ${laptop}
+layout laptop 'Slack':REPEAT                ${right}   ${laptop}
+layout laptop 'iTerm2':REPEAT               ${center}  ${laptop}
+layout laptop 'Sublime Text':REPEAT         ${whole}   ${laptop}
+layout laptop 'Fork':REPEAT                 ${whole}   ${laptop}
+layout laptop 'Microsoft Outlook':REPEAT    ${whole}   ${laptop}
+layout laptop 'Spotify':REPEAT              ${whole}   ${laptop}
+layout laptop 'Sonos S1 Controller':REPEAT  ${whole}   ${laptop}
 
 # Default Layouts
-default dual count:2
-default single count:1
+default urbn      resolutions:${laptop};${external}
+default laptop    resolutions:${laptop}
+default imac-dual count:2
 
+# Key Bindings
 bind g:ctrl,shift grid
+bind j:cmd,shift  push left
+bind l:cmd,shift  push right
+bind i:cmd,shift  push up
+bind k:cmd,shift  push down
+bind j:ctrl,shift nudge -${col} +0
+bind l:ctrl,shift nudge +${col} +0
+bind i:ctrl,shift nudge +0      -${row}
+bind k:ctrl,shift nudge +0      +${row}
+bind j:alt,shift  resize -10% +0
+bind l:alt,shift  resize +10% +0
+bind i:alt,shift  resize +0   -10%
+bind k:alt,shift  resize +0   +10%

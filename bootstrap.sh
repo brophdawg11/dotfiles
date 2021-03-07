@@ -12,9 +12,8 @@ for F in $(find . -type f -maxdepth 1 -not -iname "bootstrap.sh"); do
         echo "${F} - creating symlink"
         ln -s "$(pwd)/${F}" "${LINK_FILE}"
     else
-        echo "${F} - exits as a file - backing up and replacing"
+        echo "${F} - exists as a file - backing up and replacing"
         BACKUP_FILE="${BACKUP_DIR}/${F}-$(date +"%Y-%m-%dT%H-%M-%S")"
-        echo "${F} not linked, backing up to ${BACKUP_FILE}"
 
         if [[ ! -d "${BACKUP_DIR}" ]]; then
             mkdir "${BACKUP_DIR}"
