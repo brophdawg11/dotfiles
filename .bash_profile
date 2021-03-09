@@ -23,12 +23,7 @@ export GREP_OPTIONS="--color"
 export HOMEBREW_BUNDLE_FILE="~/Brewfile"
 export N_PREFIX="${N_DIR}"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
-# Bring in git-prompt and tab completion
-GIT_DIR="$(dirname $(which git))/$(dirname $(readlink $(which git)))/.."
-. "${GIT_DIR}/etc/bash_completion.d/git-prompt.sh"
-. "${GIT_DIR}/etc/bash_completion.d/git-completion.bash"
-
-# Homebrew bash completion
+# Homebrew bash completion (includes git)
 [ -f "${BREW_DIR}/etc/bash_completion" ] && . "${BREW_DIR}/etc/bash_completion"
 
 ##### Aliases #####
