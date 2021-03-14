@@ -1,0 +1,20 @@
+[core]
+	excludesfile = /Users/matt/.gitignore
+	pager = cat
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[user]
+	name = Matt Brophy
+	email = matt@brophy.org
+[alias]
+	co = checkout
+	pu = push --set-upstream
+	ass = add
+	comit = commit
+	pul = pull
+[init]
+	defaultBranch = main
