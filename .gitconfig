@@ -12,3 +12,5 @@
 	pul = pull
 [init]
 	defaultBranch = main
+[pull]
+	ff = only

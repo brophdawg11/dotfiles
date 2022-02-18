@@ -24,65 +24,69 @@ alias h-1  ${h}*0.95
 alias h-2  ${h}*0.90
 
 # Display aliases
-alias w5        move  ${x}+0*${col};${y}  5*${col};${h}
-alias w5-o1     move  ${x}+1*${col};${y}  5*${col};${h}
-alias w5-o2     move  ${x}+2*${col};${y}  5*${col};${h}
-alias w5-o3     move  ${x}+3*${col};${y}  5*${col};${h}
-alias w5-o4     move  ${x}+4*${col};${y}  5*${col};${h}
-alias w5-o5     move  ${x}+5*${col};${y}  5*${col};${h}
-alias w5-h1     move  ${x}+0*${col};${y}  5*${col};${h-1}
-alias w5-o1-h1  move  ${x}+1*${col};${y}  5*${col};${h-1}
-alias w5-o2-h1  move  ${x}+2*${col};${y}  5*${col};${h-1}
-alias w5-o3-h1  move  ${x}+3*${col};${y}  5*${col};${h-1}
-alias w5-o4-h1  move  ${x}+4*${col};${y}  5*${col};${h-1}
-alias w5-o5-h1  move  ${x}+5*${col};${y}  5*${col};${h-1}
-alias w5-h2     move  ${x}+0*${col};${y}  5*${col};${h-2}
-alias w5-o1-h2  move  ${x}+1*${col};${y}  5*${col};${h-2}
-alias w5-o2-h2  move  ${x}+2*${col};${y}  5*${col};${h-2}
-alias w5-o3-h2  move  ${x}+3*${col};${y}  5*${col};${h-2}
-alias w5-o4-h2  move  ${x}+4*${col};${y}  5*${col};${h-2}
-alias w5-o5-h2  move  ${x}+5*${col};${y}  5*${col};${h-2}
-alias w6        move  ${x}+6*${col};${y}  5*${col};${h}
-alias w8        move  ${x}+0*${col};${y}  8*${col};${h}
-alias w8-o1     move  ${x}+1*${col};${y}  8*${col};${h}
-alias w8-o2     move  ${x}+2*${col};${y}  8*${col};${h}
-alias w10       move  ${x};${y}           10*${col};${h}
+alias w5        move  ${x}+0*${col};${y}           5*${col};${h}
+alias w5-o1     move  ${x}+1*${col};${y}           5*${col};${h}
+alias w5-o2     move  ${x}+2*${col};${y}           5*${col};${h}
+alias w5-o3     move  ${x}+3*${col};${y}           5*${col};${h}
+alias w5-o4     move  ${x}+4*${col};${y}           5*${col};${h}
+alias w5-o5     move  ${x}+5*${col};${y}           5*${col};${h}
+alias w5-h1     move  ${x}+0*${col};${y}           5*${col};${h-1}
+alias w5-o1-h1  move  ${x}+1*${col};${y}           5*${col};${h-1}
+alias w5-o2-h1  move  ${x}+2*${col};${y}           5*${col};${h-1}
+alias w5-o3-h1  move  ${x}+3*${col};${y}           5*${col};${h-1}
+alias w5-o4-h1  move  ${x}+4*${col};${y}           5*${col};${h-1}
+alias w5-o5-h1  move  ${x}+5*${col};${y}           5*${col};${h-1}
+alias w5-o5-h-4 move  ${x}+5*${col};${y}+${row}*3  5*${col};${h}-${row}*3
+alias w5-h2     move  ${x}+0*${col};${y}           5*${col};${h-2}
+alias w5-o1-h2  move  ${x}+1*${col};${y}           5*${col};${h-2}
+alias w5-o2-h2  move  ${x}+2*${col};${y}           5*${col};${h-2}
+alias w5-o3-h2  move  ${x}+3*${col};${y}           5*${col};${h-2}
+alias w5-o4-h2  move  ${x}+4*${col};${y}           5*${col};${h-2}
+alias w5-o5-h2  move  ${x}+5*${col};${y}           5*${col};${h-2}
+alias w6        move  ${x}+6*${col};${y}           5*${col};${h}
+alias w8        move  ${x}+0*${col};${y}           8*${col};${h}
+alias w8-o1     move  ${x}+1*${col};${y}           8*${col};${h}
+alias w8-o2     move  ${x}+2*${col};${y}           8*${col};${h}
+alias w10       move  ${x};${y}                    10*${col};${h}
 
 # Display profiles
-## Home - iMac + External
-layout imac-dual 'Google Chrome':REPEAT_LAST,TITLE_ORDER_REGEX=^DevTools.*$  ${w5-o5} ${left} | ${w5} ${right}
-layout imac-dual 'Spotify':REPEAT              ${w5}     ${left}
-layout imac-dual 'Sonos S1 Controller':REPEAT  ${w5}     ${left}
-layout imac-dual 'Slack':REPEAT                ${w5-o5}  ${left}
-layout imac-dual 'Numbers':REPEAT              ${w5-o5}  ${left}
-layout imac-dual 'iTerm2':REPEAT               ${w5-o3}  ${right}
-layout imac-dual 'Sublime Text':REPEAT         ${w5-o5}  ${right}
-layout imac-dual 'Sourcetree':REPEAT           ${w5-o5}  ${right}
+## iMac + External
+layout imac-dual 'Google Chrome':REPEAT_LAST,TITLE_ORDER_REGEX=^DevTools ${w5-o5-h-4} ${left} | ${w5-h2} ${left}
+layout imac-dual 'Slack':REPEAT                    ${w5-o1-h1}  ${left}
+layout imac-dual 'Discord':REPEAT                  ${w5-o1-h1}  ${left}
+layout imac-dual 'iTerm2':REPEAT                   ${w5-o2}     ${left}
+layout imac-dual 'Numbers':REPEAT                  ${w5-o5}     ${left}
+layout imac-dual 'Sublime Text':REPEAT             ${w5-o5-h1}  ${left}
+layout imac-dual 'Code':REPEAT                     ${w5-o5-h1}  ${left}
+layout imac-dual 'Spotify':REPEAT                  ${w5-o5}     ${right}
+layout imac-dual 'Sonos S1 Controller':REPEAT      ${w5-o5}     ${right}
+layout imac-dual 'Fork':REPEAT                     ${w5}        ${right}
 
-## URBN - Laptop + External
-layout urbn 'Google Chrome':REPEAT_LAST,TITLE_ORDER_REGEX=^Dev(eloper\s)?Tools\s-\s.+$  ${w10} ${laptop} | ${w5-h2} ${external}
-layout urbn 'Slack':REPEAT               ${w5-o1-h1}  ${external}
-layout urbn 'iTerm2':REPEAT              ${w5-o2}     ${external}
-layout urbn 'Sublime Text':REPEAT        ${w5-o5}     ${external}
-layout urbn 'Fork':REPEAT                ${w5-o5}     ${external}
-layout urbn 'Microsoft Outlook':REPEAT   ${w6}        ${external}
-layout urbn 'Spotify':REPEAT             ${w10}       ${laptop}
-layout urbn 'Sonos S1 Controller':REPEAT ${w10}       ${laptop}
+## Laptop + External
+layout laptop-dual 'Google Chrome':'Google Chrome':REPEAT_LAST,TITLE_ORDER_REGEX=^DevTools ${w10} ${laptop} | ${w5-h2} ${external}
+layout laptop-dual 'Slack':REPEAT                  ${w5-o1-h1}  ${external}
+layout laptop-dual 'Discord':REPEAT                ${w5-o1-h1}  ${external}
+layout laptop-dual 'iTerm2':REPEAT                 ${w5-o2}     ${external}
+layout laptop-dual 'Sublime Text':REPEAT           ${w5-o5}     ${external}
+layout laptop-dual 'Fork':REPEAT                   ${w5-o5}     ${external}
+layout laptop-dual 'Microsoft Outlook':REPEAT      ${w6}        ${external}
+layout laptop-dual 'Spotify':REPEAT                ${w10}       ${laptop}
+layout laptop-dual 'Sonos S1 Controller':REPEAT    ${w10}       ${laptop}
 
 ## Laptop only
-layout laptop 'Google Chrome':REPEAT        ${w10}    ${laptop}
-layout laptop 'iTerm2':REPEAT               ${w8-o1}  ${laptop}
-layout laptop 'Slack':REPEAT                ${w8-o2}  ${laptop}
-layout laptop 'Sublime Text':REPEAT         ${w8}     ${laptop}
-layout laptop 'Fork':REPEAT                 ${w10}    ${laptop}
-layout laptop 'Microsoft Outlook':REPEAT    ${w10}    ${laptop}
-layout laptop 'Spotify':REPEAT              ${w10}    ${laptop}
-layout laptop 'Sonos S1 Controller':REPEAT  ${w10}    ${laptop}
+layout laptop 'Google Chrome':REPEAT               ${w10}    ${laptop}
+layout laptop 'iTerm2':REPEAT                      ${w8-o1}  ${laptop}
+layout laptop 'Slack':REPEAT                       ${w8-o2}  ${laptop}
+layout laptop 'Sublime Text':REPEAT                ${w8}     ${laptop}
+layout laptop 'Fork':REPEAT                        ${w10}    ${laptop}
+layout laptop 'Microsoft Outlook':REPEAT           ${w10}    ${laptop}
+layout laptop 'Spotify':REPEAT                     ${w10}    ${laptop}
+layout laptop 'Sonos S1 Controller':REPEAT         ${w10}    ${laptop}
 
 # Default Layouts
-default urbn      resolutions:${laptop};${external}
-default laptop    resolutions:${laptop}
-default imac-dual count:2
+default laptop-dual resolutions:${laptop};${external}
+default laptop      resolutions:${laptop}
+default imac-dual   count:2
 
 # Key Bindings
 bind g:ctrl,shift grid
