@@ -51,7 +51,7 @@ alias w10       move  ${x};${y}                    10*${col};${h}
 
 # Display profiles
 ## iMac + External
-layout imac-dual 'Google Chrome':REPEAT_LAST,TITLE_ORDER_REGEX=^DevTools ${w5-o5-h-4} ${left} | ${w5-h2} ${left}
+layout imac-dual 'Google Chrome':REPEAT_LAST,TITLE_ORDER_REGEX=^(?!DevTools),^DevTools,^(?!DevTools) ${w5-h2} ${left} | ${w5-o5-h-4} ${left} | ${w5-h2} ${left}
 layout imac-dual 'Slack':REPEAT                    ${w5-o1-h1}  ${left}
 layout imac-dual 'Discord':REPEAT                  ${w5-o1-h1}  ${left}
 layout imac-dual 'iTerm2':REPEAT                   ${w5-o2}     ${left}
