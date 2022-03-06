@@ -10,7 +10,7 @@ config focusCheckWidthMax 3000
 alias left     0
 alias right    1
 alias imac     2560x1440
-alias laptop   1440x900
+alias laptop   1512x982
 alias external 2560x1440
 
 # Grid aliases
