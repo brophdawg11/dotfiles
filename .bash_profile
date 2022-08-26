@@ -2,7 +2,6 @@ echo "Running .bash_profile"
 
 # Prerequisites to be set in .bash_profile_local_pre:
 # BREW_DIR - base installation dir for homebrew
-# N_DIR - base installation dir for n
 
 ##### Machine-local pre config #####
 if [ -f ~/.bash_profile_local_pre ]; then
@@ -21,7 +20,6 @@ export PATH="${BREW_DIR}/bin:$PATH"
 export EDITOR="emacs"
 export GREP_OPTIONS="--color"
 export HOMEBREW_BUNDLE_FILE="~/Brewfile"
-export N_PREFIX="${N_DIR}"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
 # Homebrew bash completion (includes git)
 [ -f "${BREW_DIR}/etc/bash_completion" ] && . "${BREW_DIR}/etc/bash_completion"

@@ -63,11 +63,12 @@ layout imac-dual 'Sonos S1 Controller':REPEAT      ${w5-o5}     ${right}
 layout imac-dual 'Fork':REPEAT                     ${w5}        ${right}
 
 ## Laptop + External
-layout laptop-dual 'Google Chrome':'Google Chrome':REPEAT_LAST,TITLE_ORDER_REGEX=^DevTools ${w10} ${laptop} | ${w5-h2} ${external}
+layout laptop-dual 'Google Chrome':REPEAT_LAST,TITLE_ORDER_REGEX=^(?!DevTools),^DevTools,^(?!DevTools) ${w5-h2} ${external} | ${w10} ${laptop} | ${w5-h2} ${external}
 layout laptop-dual 'Slack':REPEAT                  ${w5-o1-h1}  ${external}
 layout laptop-dual 'Discord':REPEAT                ${w5-o1-h1}  ${external}
 layout laptop-dual 'iTerm2':REPEAT                 ${w5-o2}     ${external}
 layout laptop-dual 'Sublime Text':REPEAT           ${w5-o5}     ${external}
+layout laptop-dual 'Code':REPEAT                   ${w5-o5}     ${external}
 layout laptop-dual 'Fork':REPEAT                   ${w5-o5}     ${external}
 layout laptop-dual 'Microsoft Outlook':REPEAT      ${w6}        ${external}
 layout laptop-dual 'Spotify':REPEAT                ${w10}       ${laptop}
@@ -76,8 +77,9 @@ layout laptop-dual 'Sonos S1 Controller':REPEAT    ${w10}       ${laptop}
 ## Laptop only
 layout laptop 'Google Chrome':REPEAT               ${w10}    ${laptop}
 layout laptop 'iTerm2':REPEAT                      ${w8-o1}  ${laptop}
-layout laptop 'Slack':REPEAT                       ${w8-o2}  ${laptop}
-layout laptop 'Sublime Text':REPEAT                ${w8}     ${laptop}
+layout laptop 'Slack':REPEAT                       ${w8}     ${laptop}
+layout laptop 'Sublime Text':REPEAT                ${w8-o2}  ${laptop}
+layout laptop 'Code':REPEAT                        ${w8-o2}  ${laptop}
 layout laptop 'Fork':REPEAT                        ${w10}    ${laptop}
 layout laptop 'Microsoft Outlook':REPEAT           ${w10}    ${laptop}
 layout laptop 'Spotify':REPEAT                     ${w10}    ${laptop}
