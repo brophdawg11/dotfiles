@@ -20,6 +20,7 @@ export PATH="${BREW_DIR}/bin:$PATH"
 export EDITOR="emacs"
 export GREP_OPTIONS="--color"
 export HOMEBREW_BUNDLE_FILE="~/Brewfile"
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
 # Homebrew bash completion (includes git)
 [ -f "${BREW_DIR}/etc/bash_completion" ] && . "${BREW_DIR}/etc/bash_completion"
@@ -27,7 +28,9 @@ export HOMEBREW_BUNDLE_FILE="~/Brewfile"
 ##### Aliases #####
 alias ls="ls -Fla"
 alias rm="rm -i"
-alias npx-debug="npx --node-arg=--inspect-brk"
+alias npx-debug="npx --node-options=\"--inspect-brk\""
+alias bp="code ~/.bash_profile"
+alias bpl="code ~/.bash_profile_local_pre"
 
 
 ##### Utility Functions #####
@@ -60,20 +63,20 @@ function marks {
 }
 
 # Delete the docker qcow2 file to clean up space on OSX
-function docker-qcow2-cleanup {
-  docker ps
-  if [ $? == 0 ]; then
-    echo "Please kill docker first";
-  elif [! -f ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2 ]; then
-    echo "No Docker.qcow2 file found";
-  else
-    df -h
-    echo "Removing Docker.qcow2"
-    ls ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/
-    rm -f ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2
-    df -h
-  fi
-}
+# function docker-qcow2-cleanup {
+#   docker ps
+#   if [ $? == 0 ]; then
+#     echo "Please kill docker first";
+#   elif [! -f ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2 ]; then
+#     echo "No Docker.qcow2 file found";
+#   else
+#     df -h
+#     echo "Removing Docker.qcow2"
+#     ls ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/
+#     rm -f ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2
+#     df -h
+#   fi
+# }
 
 ##### Bash Prompt #####
 Green="\[\033[0;32m\]"        # Green
@@ -107,4 +110,3 @@ if [ -f ~/.bash_profile_local_post ]; then
     echo "  Running .bash_profile_local_post"
     . ~/.bash_profile_local_post
 fi
-
