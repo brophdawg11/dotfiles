@@ -29,6 +29,7 @@ export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PR
 alias ls="ls -Fla"
 alias rm="rm -i"
 alias npx-debug="npx --node-options=\"--inspect-brk\""
+alias nodets="node --experimental-strip-types"
 alias bp="code ~/.bash_profile"
 alias bpl="code ~/.bash_profile_local_pre"
 
