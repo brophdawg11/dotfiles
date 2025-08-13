@@ -12,8 +12,6 @@ else
     return
 fi
 
-cd "${START_DIR}"
-
 ##### Global Updates #####
 export PATH="${HOME}/bin:$PATH"
 export PATH="${BREW_DIR}/bin:$PATH"
